@@ -1,12 +1,17 @@
-import Left from "./home/Leftpart/Left"
-import Right from "./home/Rightpart/Right"
+import React from 'react'
+import Left from './home/Left/Left'
+import Right from './home/Right/Right'
+
 const App = () => {
-  return (
-    <div className="bg-blue-500 text-white p-4">
-      <Left />
-      <Right />
-    </div>
-  )
+    return (
+        <div className='flex h-screen'>
+
+            <Left/>
+
+            <Right/>
+
+        </div>
+    )
 }
 
 export default App
