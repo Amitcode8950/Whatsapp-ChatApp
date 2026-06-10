@@ -2,10 +2,10 @@ import React from 'react'
 import { CiLogout } from "react-icons/ci";
 const Logout = () => {
   return (
-    <div className='hover:bg-slate-400 hover:rounded-lg hover:text-white transition-colors duration-200'>
+    <div className=''>
         <button className='m-2 w-full flex items-center '>
-            <CiLogout className='text-2xl ml-3'/>
-            <h1 className='text-xl ml-3'>Logout</h1>
+            <CiLogout className='text-4xl ml-3 p-1.5 hover:bg-gray-300 hover:rounded-full hover:text-black'/>
+            
         </button>
     </div>
   )
