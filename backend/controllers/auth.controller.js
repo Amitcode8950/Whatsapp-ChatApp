@@ -1,5 +1,5 @@
 import User from "../models/auth.models.js";
-
+import bcrypt from "bcryptjs";
 export async function signup(req,res){
     try{
     if(!req){
@@ -16,7 +16,9 @@ export async function signup(req,res){
         if(existinguser){
             return res.status(400).json({message:"user already exists"});
         }
-        const newUser = new User({name,email,password});
+        
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = new User({name,email,password:hashedPassword});
         await newUser.save();
         return res.status(201).json({message:"user created successfully"});
     }catch(error){ 
