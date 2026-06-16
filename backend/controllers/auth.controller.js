@@ -36,11 +36,14 @@ export const login=async (req,res)=>{
         if(!email || !password ){
             return res.status(400).json({message:"all fields are required"});
         }
-        const user=User.findOne({email});
+        const user=await User.findOne({email});
         if(!user){
             return res.status(400).json({message:"user not found"});
         }
         const ispasswordvalid=await bcrypt.compare(password,user.password);
+        if(!ispasswordvalid){
+            return res.status(400).json({message:"invalid password"});
+        }
       
 
       generatetokenandSavecookie(user._id,res);
