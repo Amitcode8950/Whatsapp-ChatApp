@@ -7,13 +7,11 @@ import Login from './compoents/Login'
 const App = () => {
     return (
         <div className='flex h-screen'>
-{/* 
+            {/* 
             <Left/>
 
             <Right/> */}
-           {/* <Singup/> */}
-         <Login/>
-        </div>
+            <Singup/> {/* <Login/> */} </div>
     )
 }
 
