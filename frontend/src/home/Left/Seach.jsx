@@ -1,19 +1,21 @@
-import React from 'react'
-import {FaSearch} from "react-icons/fa";
-const Seach = () => {
-    return (
-        <div className='mt-4 ml-2'>
-            <form action="" className='flex gap-9'>
-                <label className="input w-[70%] bg-slate-900">
+import React from "react";
+import { FaSearch } from "react-icons/fa";
 
-                    <input type="search" required placeholder="Search"/>
-                </label>
-                <button className='w-[50px] hover:bg-slate-800 hover:rounded-lg hover:text-white transition-colors duration-200'>
-                    <FaSearch className='text-2xl ml-3'/>
-                </button>
-            </form>
-        </div>
-    )
-}
+const Seach = ({ value, onChange }) => {
+  return (
+    <div className="px-6 py-4">
+      <div className="flex items-center gap-3 rounded-full border border-slate-800 bg-slate-900 px-4 py-3 shadow-inner shadow-slate-950/50">
+        <FaSearch className="text-slate-400" />
+        <input
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          type="search"
+          placeholder="Search chats"
+          className="w-full bg-transparent text-slate-100 outline-none placeholder:text-slate-500"
+        />
+      </div>
+    </div>
+  );
+};
 
-export default Seach
+export default Seach;

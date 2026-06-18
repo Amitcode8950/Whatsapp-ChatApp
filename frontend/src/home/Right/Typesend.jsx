@@ -1,17 +1,36 @@
-import React from 'react'
+import { useState } from "react";
 import { IoSend } from "react-icons/io5";
 
-const Typesend = () => {
-    return (
-        <div className='flex gap-2 h-[8vh] text-center justify-center items-center bg-gray-800'>
-         <div className='w-[80%]'>
-             <input  type="text" placeholder="Type here" className="border outline-none rounded-full border-gray-400 p-2 w-full" />
-         </div>
-          <button className=' '>
-            <IoSend className='text-4xl'/>
-          </button>
-        </div>  
-    )
-}
+const Typesend = ({ onSend }) => {
+  const [text, setText] = useState("");
 
-export default Typesend
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!text.trim()) return;
+    onSend(text);
+    setText("");
+  };
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="flex gap-3 items-center px-6 py-4 bg-slate-950 border-t border-slate-800"
+    >
+      <input
+        value={text}
+        onChange={(event) => setText(event.target.value)}
+        type="text"
+        placeholder="Type your message..."
+        className="flex-1 rounded-full border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none focus:border-cyan-400"
+      />
+      <button
+        type="submit"
+        className="rounded-full bg-cyan-500 p-3 text-slate-950 shadow-lg shadow-cyan-500/20"
+      >
+        <IoSend className="text-xl" />
+      </button>
+    </form>
+  );
+};
+
+export default Typesend;

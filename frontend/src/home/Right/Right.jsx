@@ -1,14 +1,20 @@
-import Chatuser from "./Chatuser"
-import Message from "./Message"
-import Typesend from "./Typesend"
-const Right = () => {
-  return (
-    <div className='w-[70%] bg-slate-900 flex flex-col h-screen text-gray-300'>
-       <Chatuser/>
-       <div className=' flex-1 overflow-y-auto' style={{ minHeight: "calc(83vh)" }}><Message/></div>
-       <Typesend/>
-    </div>
-  )
-}
+import Chatuser from "./Chatuser";
+import Message from "./Message";
+import Typesend from "./Typesend";
 
-export default Right
+const Right = ({ selectedContact, messages, onSend, onStartCall, currentUserId }) => {
+  return (
+    <div className="flex w-full flex-col bg-slate-900 text-gray-100">
+      <Chatuser
+        contact={selectedContact}
+        onStartCall={() => selectedContact && onStartCall(selectedContact._id)}
+      />
+      <div className="flex-1 overflow-hidden">
+        <Message messages={messages} currentUserId={currentUserId} />
+      </div>
+      <Typesend onSend={onSend} />
+    </div>
+  );
+};
+
+export default Right;

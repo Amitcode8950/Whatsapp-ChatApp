@@ -1,14 +1,18 @@
-import React from 'react'
-import {CiLogout} from "react-icons/ci";
-const Logout = () => {
-    return (
-        <div className=''>
-            <button className='m-2 w-full flex items-center '>
-                <CiLogout className='text-4xl ml-3 p-1.5 hover:bg-gray-300 hover:rounded-full hover:text-black'/>
+import React from "react";
+import { CiLogout } from "react-icons/ci";
 
-            </button>
-        </div>
-    )
-}
+const Logout = ({ onLogout }) => {
+  return (
+    <div className="p-4">
+      <button
+        onClick={onLogout}
+        className="flex w-full items-center gap-3 rounded-2xl bg-slate-900 px-4 py-3 text-slate-200 hover:bg-slate-800"
+      >
+        <CiLogout className="text-2xl" />
+        <span>Logout</span>
+      </button>
+    </div>
+  );
+};
 
-export default Logout
+export default Logout;
