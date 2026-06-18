@@ -82,6 +82,13 @@ const App = () => {
     );
   }, [messages, selectedContactId, currentUser]);
 
+  // Helper: mark a contact as online or offline
+  const setContactStatus = (userId, status) => {
+    setContacts((prev) =>
+      prev.map((c) => (c._id === userId ? { ...c, status } : c)),
+    );
+  };
+
   useEffect(() => {
     if (!token) return;
 
@@ -90,6 +97,26 @@ const App = () => {
 
     client.on("connect_error", (error) => {
       console.error("Socket connect error:", error.message || error);
+    });
+
+    // Full snapshot of who is online right now
+    client.on("online-users", (userIds) => {
+      setContacts((prev) =>
+        prev.map((c) => ({
+          ...c,
+          status: userIds.includes(c._id) ? "online" : "offline",
+        })),
+      );
+    });
+
+    // A user just came online
+    client.on("user-online", ({ userId }) => {
+      setContactStatus(userId, "online");
+    });
+
+    // A user just went offline
+    client.on("user-offline", ({ userId }) => {
+      setContactStatus(userId, "offline");
     });
 
     client.on("message-received", (message) => {
