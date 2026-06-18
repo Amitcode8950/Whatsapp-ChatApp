@@ -1,22 +1,42 @@
 import React from "react";
 
+const isOnline = (contact) => contact.status === "online";
+
 const Users = ({ contact, selected, onClick }) => {
+  const online = isOnline(contact);
+
   return (
     <button
       type="button"
       onClick={onClick}
       className={`w-full text-left rounded-3xl border px-4 py-4 m-2 flex gap-4 items-center transition ${selected ? "border-cyan-500 bg-slate-800 text-white shadow-lg shadow-cyan-500/10" : "border-slate-800 bg-slate-900 text-slate-300 hover:border-slate-600 hover:bg-slate-800"}`}
     >
-      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-sky-500 text-slate-950 text-xl font-bold shadow-lg shadow-cyan-500/20">
-        {contact.name?.[0] || "U"}
+      {/* Avatar with online/offline dot */}
+      <div className="relative flex-shrink-0">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-sky-500 text-slate-950 text-xl font-bold shadow-lg shadow-cyan-500/20">
+          {contact.name?.[0]?.toUpperCase() || "U"}
+        </div>
+        {/* Status dot */}
+        <span
+          className={`absolute bottom-0.5 right-0.5 h-4 w-4 rounded-full border-2 border-slate-900 transition-colors duration-300 ${
+            online ? "bg-emerald-400 shadow-[0_0_6px_2px_rgba(52,211,153,0.5)]" : "bg-slate-500"
+          }`}
+        />
       </div>
+
+      {/* Text info */}
       <div className="truncate">
         <h1 className="text-lg font-semibold truncate">{contact.name}</h1>
-        <p className="mt-1 text-sm text-slate-400 truncate">{contact.email}</p>
+        <p className="mt-0.5 text-sm text-slate-400 truncate">{contact.email}</p>
         <span
-          className={`mt-2 inline-flex rounded-full px-2 py-1 text-[11px] font-semibold ${contact.status === "online" ? "bg-emerald-500/15 text-emerald-300" : "bg-slate-700 text-slate-300"}`}
+          className={`mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold ${
+            online ? "text-emerald-400" : "text-slate-500"
+          }`}
         >
-          {contact.status}
+          <span
+            className={`inline-block h-1.5 w-1.5 rounded-full ${online ? "bg-emerald-400" : "bg-slate-500"}`}
+          />
+          {online ? "Online" : "Offline"}
         </span>
       </div>
     </button>
